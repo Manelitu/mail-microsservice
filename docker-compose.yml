@@ -1,0 +1,40 @@
+version: "3"
+services:
+  database:
+    image: postgres:12.15-bullseye
+    container_name: parking-control-database
+    environment:
+      - "POSTGRES_PASSWORD=postgres"
+      - "POSTGRES_USER=postgres"
+      - "POSTGRES_DB=parking-control"
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    networks:
+      - database-network
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -h localhost -p 5432 -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  pg-admin:
+    image: dpage/pgadmin4
+    container_name: parking-control-pgadmin
+    environment:
+      - "PGADMIN_DEFAULT_EMAIL=mail@mail.com"
+      - "PGADMIN_DEFAULT_PASSWORD=admin"
+    ports:
+      - "1234:80"
+    depends_on:
+      - database
+    networks:
+      - database-network
+
+volumes:
+  pg-data:
+
+networks:
+  database-network:
+    driver: bridge
