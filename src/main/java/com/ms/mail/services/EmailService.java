@@ -1,7 +1,7 @@
 package com.ms.mail.services;
 
+import com.ms.mail.models.EmailModel;
 import com.ms.mail.repositories.EmailRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -10,5 +10,9 @@ public class EmailService {
 
     public EmailService(EmailRepository emailRepository) {
         this.emailRepository = emailRepository;
+    }
+
+    public void sendMail(EmailModel emailModel) {
+
     }
 }
