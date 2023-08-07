@@ -2,11 +2,11 @@ version: "3"
 services:
   database:
     image: postgres:12.15-bullseye
-    container_name: parking-control-database
+    container_name: ms-mail-database
     environment:
       - "POSTGRES_PASSWORD=postgres"
       - "POSTGRES_USER=postgres"
-      - "POSTGRES_DB=parking-control"
+      - "POSTGRES_DB=ms-mail"
     ports:
       - "5432:5432"
     volumes:
@@ -21,7 +21,7 @@ services:
 
   pg-admin:
     image: dpage/pgadmin4
-    container_name: parking-control-pgadmin
+    container_name: ms-mail-pgadmin
     environment:
       - "PGADMIN_DEFAULT_EMAIL=mail@mail.com"
       - "PGADMIN_DEFAULT_PASSWORD=admin"
